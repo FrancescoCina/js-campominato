@@ -58,8 +58,14 @@ for (var i = 0; i < 5; i++) {
         var playerNumber = prompt("Inserisci un numero tra 1 e 100");
     } while (playerNumber <= 0 || playerNumber > 100 || isNaN(playerNumber))
     playerNumberArray += parseInt(playerNumber);
-
     console.log("Numero scelto dal giocatore", playerNumber);
+    if (casualArray.includes(playerNumber)) {
+        console.log("GAME OVER HAI PERSO!!!!");
+        console.log("Hai perso, il punteggio da te totalizzato è: ", playerScoreArray);
+    } else {
+        ++playerScoreArray;
+        console.log("Punteggio giocatore", playerScoreArray);
+    }
 
 }
 
