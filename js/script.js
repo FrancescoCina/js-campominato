@@ -19,13 +19,46 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 // GIOCO
 1- Prompt all'utente per richiedere un numero compreso tra 1 e 100 <-- while con contatore (condizione finale i < 100 - arrayNumeriCasuali.length ) che richiede ogni volta / No numeri doppi (function isInArray);
 2- Se non prende una bomba glielo richiedo; (function isInArray);
-3- Se il numero utente corrisponde ad uno dei numeri interni all'Array, GAME OVER per l'utente, con stampa punteggio ottenuto (lenght dell'array PUNTEGGIO);
-4- Se utente va in fondo per tutti i livelli (stampa HAI VINTO)
-
-
-
-
 
 // ALLA FINE DELLA PARTITA
-
+1- Se il numero utente corrisponde ad uno dei numeri interni all'Array, GAME OVER per l'utente, con stampa punteggio ottenuto (lenght dell'array PUNTEGGIO);
+2- Se utente va in fondo per tutti i livelli (stampa HAI VINTO);
 */
+
+let casualArray = "";
+
+for (var i = 0; i < 16; i++) {
+    var currentNumber = randomizeNumber(1, 100) + ",";
+    casualArray += currentNumber;
+}
+
+casualArray = casualArray.split(",");
+casualArrayWithoutLastElement = casualArray.pop();
+// console.log(casualArray);
+
+while (casualArray.includes(currentNumber)) {
+    for (var i = 0; i < 16; i++) {
+        var currentNumber = randomizeNumber(1, 100) + ",";
+        casualArray += currentNumber;
+    }
+}
+
+console.table(casualArray);
+
+
+
+// FUNZIONI
+// Funzione per randomizzare numero
+
+function randomizeNumber(min, max) {
+    var randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+    return randomNumber;
+}
+
+// TODO --> Funzione per capire se un numero è presente in un array (alternativa ad includes)
+
+/* function isInArray(element, arr) {
+
+} */
+
+// --------------------------------------------
