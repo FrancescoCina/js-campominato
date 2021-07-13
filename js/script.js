@@ -12,7 +12,7 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 /*
 // PREPARAZIONE
 1- Creazione Array per numeri casuali (da 1 a 16);
-2- Randomizzazione numeri casuali e inserimento in Array / No numeri doppi (function isInArray);
+2- Randomizzazione numeri casuali e inserimento in Array / No numeri doppi (function includes / isInArray);
 3- Creazione Array per storare i numeri del giocatore;
 4- Creazione Array per storare il punteggio del giocatore, ogni volta che non trova la bomba guadagna un punto;
 
@@ -44,6 +44,41 @@ while (casualArray.includes(currentNumber)) {
 }
 
 console.table(casualArray);
+
+let playerNumberArray = "";
+
+let playerScoreArray = "";
+
+
+// for (var i = 0; i < 100 - casualArray.length; i++) { ///// --> For funzionante per le 84 volte che dovrò chiedere il numero all'utente
+
+
+for (var i = 0; i < 5; i++) {
+    do {
+        var playerNumber = prompt("Inserisci un numero tra 1 e 100");
+    } while (playerNumber <= 0 || playerNumber > 100 || isNaN(playerNumber))
+    playerNumberArray += parseInt(playerNumber);
+
+    console.log("Numero scelto dal giocatore", playerNumber);
+
+}
+
+playerNumberArray = playerNumberArray.split("");
+console.table(playerNumberArray);
+
+/* if (playerNumberArray.includes(playerNumber)) {
+    for (var i = 0; i < 5; i++) {
+        do {
+            var playerNumber = prompt("Inserisci un numero tra 1 e 100");
+        } while (playerNumber <= 0 || playerNumber > 100 || isNaN(playerNumber))
+        playerNumberArray += parseInt(playerNumber);
+
+        console.log("Numero scelto dal giocatore", playerNumber);
+
+    }
+} */
+
+
 
 
 
