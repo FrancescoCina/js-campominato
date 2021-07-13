@@ -25,6 +25,11 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 2- Se utente va in fondo per tutti i livelli (stampa HAI VINTO);
 */
 
+
+let outcomeGame = document.getElementById("outcome-game");
+let displayScorePlayer = document.getElementById("display-score-player");
+
+
 let casualArray = [];
 
 while (casualArray.length < 16) {
@@ -41,8 +46,11 @@ let playerNumberArray = [];
 let playerScore = 0;
 
 
-// for (var i = 0; i < 100 - casualArray.length; i++) { ///// --> For funzionante per le 84 volte che dovrò chiedere il numero all'utente
+
+
 var lost = false;
+
+// for (var i = 0; i < 100 - casualArray.length; i++) { ///// --> For funzionante per le 84 volte che dovrò chiedere il numero all'utente
 
 for (var i = 0; i < 5; i++) {
     do {
@@ -52,11 +60,13 @@ for (var i = 0; i < 5; i++) {
     console.log("Numero scelto dal giocatore", playerNumber);
     if (!casualArray.includes(playerNumber)) {
         playerScore++;
+        displayScorePlayer.innerHTML = playerScore;
         console.log("Punteggio giocatore", playerScore);
     } else {
         console.log("GAME OVER HAI PERSO!!!!");
         console.log("Hai perso, il punteggio da te totalizzato è: ", playerScore);
         lost = true;
+        // break;
     }
 }
 
@@ -64,24 +74,12 @@ for (var i = 0; i < 5; i++) {
 console.table(playerNumberArray);
 if (lost) {
     console.log("Hai perso, il punteggio da te totalizzato è: ", playerScore);
+    outcomeGame.innerHTML = "GAME OVER! Riprova"
 } else {
     console.log("Hai vinto, il punteggio da te totalizzato è: ", playerScore);
+    outcomeGame.innerHTML = "COMPLIMENTI HAI VINTO!!"
 
 }
-
-
-/* if (playerNumberArray.includes(playerNumber)) {
-    for (var i = 0; i < 5; i++) {
-        do {
-            var playerNumber = prompt("Inserisci un numero tra 1 e 100");
-        } while (playerNumber <= 0 || playerNumber > 100 || isNaN(playerNumber))
-        playerNumberArray += parseInt(playerNumber);
-
-        console.log("Numero scelto dal giocatore", playerNumber);
-
-    }
-} */
-
 
 
 
