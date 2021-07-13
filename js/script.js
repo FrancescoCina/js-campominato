@@ -25,52 +25,50 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 2- Se utente va in fondo per tutti i livelli (stampa HAI VINTO);
 */
 
-let casualArray = "";
+let casualArray = [];
 
-for (var i = 0; i < 16; i++) {
-    var currentNumber = randomizeNumber(1, 100) + ",";
-    casualArray += currentNumber;
-}
-
-casualArray = casualArray.split(",");
-casualArrayWithoutLastElement = casualArray.pop();
-// console.log(casualArray);
-
-while (casualArray.includes(currentNumber)) {
-    for (var i = 0; i < 16; i++) {
-        var currentNumber = randomizeNumber(1, 100) + ",";
-        casualArray += currentNumber;
+while (casualArray.length < 16) {
+    var currentNumber = randomizeNumber(1, 100);
+    if (!casualArray.includes(currentNumber)) {
+        casualArray.push(currentNumber);
     }
 }
 
 console.table(casualArray);
 
-let playerNumberArray = "";
+let playerNumberArray = [];
 
-let playerScoreArray = "";
+let playerScore = 0;
 
 
 // for (var i = 0; i < 100 - casualArray.length; i++) { ///// --> For funzionante per le 84 volte che dovrò chiedere il numero all'utente
-
+var lost = false;
 
 for (var i = 0; i < 5; i++) {
     do {
-        var playerNumber = prompt("Inserisci un numero tra 1 e 100");
-    } while (playerNumber <= 0 || playerNumber > 100 || isNaN(playerNumber))
-    playerNumberArray += parseInt(playerNumber);
+        var playerNumber = parseInt(prompt("Inserisci un numero tra 1 e 100"));
+    } while (playerNumber <= 0 || playerNumber > 100 || playerNumberArray.includes(playerNumber));
+    playerNumberArray.push(playerNumber);
     console.log("Numero scelto dal giocatore", playerNumber);
-    if (casualArray.includes(playerNumber)) {
-        console.log("GAME OVER HAI PERSO!!!!");
-        console.log("Hai perso, il punteggio da te totalizzato è: ", playerScoreArray);
+    if (!casualArray.includes(playerNumber)) {
+        playerScore++;
+        console.log("Punteggio giocatore", playerScore);
     } else {
-        ++playerScoreArray;
-        console.log("Punteggio giocatore", playerScoreArray);
+        console.log("GAME OVER HAI PERSO!!!!");
+        console.log("Hai perso, il punteggio da te totalizzato è: ", playerScore);
+        lost = true;
     }
+}
+
+
+console.table(playerNumberArray);
+if (lost) {
+    console.log("Hai perso, il punteggio da te totalizzato è: ", playerScore);
+} else {
+    console.log("Hai vinto, il punteggio da te totalizzato è: ", playerScore);
 
 }
 
-playerNumberArray = playerNumberArray.split("");
-console.table(playerNumberArray);
 
 /* if (playerNumberArray.includes(playerNumber)) {
     for (var i = 0; i < 5; i++) {
