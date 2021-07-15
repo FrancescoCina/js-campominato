@@ -25,15 +25,43 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 2- Se utente va in fondo per tutti i livelli (stampa HAI VINTO);
 */
 
+// -----------------------------------------------
+
+
+
+// DECLARATION VARIABLES TO  DISPLAY IN HTML
 
 let outcomeGame = document.getElementById("outcome-game");
 let displayScorePlayer = document.getElementById("display-score-player");
+let displayLevel = document.getElementById("user-level");
 
+
+let totalNumbers = 100;
+
+let level = prompt('Che livello scegli? "facile" "normale" o "difficile"');
+const levelAllowed = ["facile", "normale", "difficile"];
+
+
+while (!level || level.toLowerCase().trim() === "" || !levelAllowed.includes(level)) {
+    level = prompt('Che livello scegli? "facile" "normale" o "difficile"');
+}
+
+switch (level) {
+    case "facile":
+        totalNumbers = 100;
+        break;
+    case "difficile":
+        totalNumbers = 50;
+        break;
+    case "normale":
+        totalNumbers = 80;
+        break;
+}
 
 let casualArray = [];
 
 while (casualArray.length < 16) {
-    var currentNumber = randomizeNumber(1, 100);
+    var currentNumber = randomizeNumber(1, totalNumbers);
     if (!casualArray.includes(currentNumber)) {
         casualArray.push(currentNumber);
     }
@@ -41,21 +69,24 @@ while (casualArray.length < 16) {
 
 console.table(casualArray);
 
+console.log("livello:", level);
+displayLevel.innerHTML = "Hai scelto il livello: " + level
+
+const attempts = totalNumbers - casualArray.length;
+console.log("tentativi:", attempts);
+
+
 let playerNumberArray = [];
 
 let playerScore = 0;
 
 
+let lost = false;
 
-
-var lost = false;
-
-// for (var i = 0; i < 100 - casualArray.length; i++) { ///// --> For funzionante per le 84 volte che dovrò chiedere il numero all'utente
-
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < attempts; i++) {
     do {
         var playerNumber = parseInt(prompt("Inserisci un numero tra 1 e 100"));
-    } while (playerNumber <= 0 || playerNumber > 100 || playerNumberArray.includes(playerNumber));
+    } while (playerNumber <= 0 || playerNumber > 100 || playerNumberArray.includes(playerNumber) || isNaN(playerNumber));
     playerNumberArray.push(playerNumber);
     console.log("Numero scelto dal giocatore", playerNumber);
     if (!casualArray.includes(playerNumber)) {
@@ -64,9 +95,9 @@ for (var i = 0; i < 5; i++) {
         console.log("Punteggio giocatore", playerScore);
     } else {
         console.log("GAME OVER HAI PERSO!!!!");
-        console.log("Hai perso, il punteggio da te totalizzato è: ", playerScore);
+        console.log("Il punteggio da te totalizzato è: ", playerScore);
         lost = true;
-        // break;
+        break;
     }
 }
 
@@ -78,10 +109,7 @@ if (lost) {
 } else {
     console.log("Hai vinto, il punteggio da te totalizzato è: ", playerScore);
     outcomeGame.innerHTML = "COMPLIMENTI HAI VINTO!!"
-
 }
-
-
 
 
 // FUNZIONI
@@ -94,8 +122,10 @@ function randomizeNumber(min, max) {
 
 // TODO --> Funzione per capire se un numero è presente in un array (alternativa ad includes)
 
-/* function isInArray(element, arr) {
 
-} */
+
+
+
+
 
 // --------------------------------------------
